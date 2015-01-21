@@ -18,9 +18,7 @@
     def print_board
       self.format_board
       @board.each do |row|
-        row.each do |space|
-          puts space
-        end
+        puts row.each { |space| space}.join(" ")
       end
     end
   end
@@ -30,9 +28,11 @@
       @board = board
       @board.print_board
     end
+
   end
 # end
 
 board = Game.new
+
 
 
