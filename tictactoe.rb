@@ -23,11 +23,16 @@
         end
       end
     end
+  end
 
-
+  class Game
+    def initialize(board = Board.new)
+      @board = board
+      @board.print_board
+    end
   end
 # end
 
-board = Board.new
-board.print_board
+board = Game.new
+
 
