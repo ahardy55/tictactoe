@@ -35,6 +35,10 @@
       ]
     end
 
+    def available?(coordinate)
+
+    end
+
   end
 
   class Game
@@ -44,29 +48,26 @@
       @board.print_board
     end
 
-    def map_move(coordinate)
-      @coordinate = coordinate
-      #refactor this
-      if @coordinate == "1"
-        @board.game_board[0][0] = "X"
-      elsif @coordinate == "2"
-        @board.game_board[0][1] = "X"
-      elsif @coordinate == "3"
-        @board.game_board[0][2] = "X"
-      elsif @coordinate == "4"
-        @board.game_board[1][0] = "X"
-      elsif @coordinate == "5"
-        @board.game_board[1][1] = "X"
-      elsif @coordinate == "6"
-        @board.game_board[1][2] = "X"
-      elsif @coordinate == "7"
-        @board.game_board[2][0] = "X"
-      elsif @coordinate == "8"
-        @board.game_board[2][1] = "X"
-      elsif @coordinate == "9"
-        @board.game_board[2][2] = "X"
-      end
-      puts "========"
+    def set_coordinates(coordinate)
+      @coordinate = {
+        "1" => [0, 0], 
+        "2" => [0, 1],
+        "3" => [0, 2],
+        "4" => [1, 0],
+        "5" => [1, 1],
+        "6" => [1, 2],
+        "7" => [2, 0],
+        "8" => [2, 1],
+        "9" => [2, 2],
+      }
+      @x = @coordinate[coordinate].first
+      @y = @coordinate[coordinate].last
+    end
+
+    def map_move
+      @board.game_board[@x][@y] = "X"
+
+       puts "========"
 
       @board.print_board
     end
@@ -74,9 +75,11 @@
   
   end
 # end
-board = Board.new
-board.format_board
-board.winning_spaces
+
+game = Game.new
+game.set_coordinates("1")
+game.map_move
+
 
 
 
