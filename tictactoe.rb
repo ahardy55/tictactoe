@@ -35,16 +35,34 @@
 
       if @coordinate == "1"
         @board.game_board[0][0] = "X"
+      elsif @coordinate == "2"
+        @board.game_board[0][1] = "X"
+      elsif @coordinate == "3"
+        @board.game_board[0][2] = "X"
+      elsif @coordinate == "4"
+        @board.game_board[1][0] = "X"
+      elsif @coordinate == "5"
+        @board.game_board[1][1] = "X"
+      elsif @coordinate == "6"
+        @board.game_board[1][2] = "X"
+      elsif @coordinate == "7"
+        @board.game_board[2][0] = "X"
+      elsif @coordinate == "8"
+        @board.game_board[2][1] = "X"
+      elsif @coordinate == "9"
+        @board.game_board[2][2] = "X"
       end
+      puts "========"
 
       @board.print_board
     end
+    
 
   end
 # end
 
 board = Game.new
-board.map_move("1")
+board.map_move("9")
 
 
 
