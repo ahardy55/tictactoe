@@ -21,6 +21,20 @@
         puts row.each { |space| space}.join(" ")
       end
     end
+
+    def winning_spaces
+      @winners = [
+        game_board[0], 
+        game_board[1], 
+        game_board[2], 
+        game_board.transpose[0], 
+        game_board.transpose[1], 
+        game_board.transpose[2],
+        [game_board[0][0], game_board[1][1], game_board[2][2]],
+        [game_board[0][2], game_board[1][1], game_board[2][0]]
+      ]
+    end
+
   end
 
   class Game
@@ -32,7 +46,7 @@
 
     def map_move(coordinate)
       @coordinate = coordinate
-
+      #refactor this
       if @coordinate == "1"
         @board.game_board[0][0] = "X"
       elsif @coordinate == "2"
@@ -56,13 +70,13 @@
 
       @board.print_board
     end
-    
 
+  
   end
 # end
-
-board = Game.new
-board.map_move("9")
+board = Board.new
+board.format_board
+board.winning_spaces
 
 
 
