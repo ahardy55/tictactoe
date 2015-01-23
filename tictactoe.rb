@@ -70,8 +70,8 @@
         "9" => [2, 2],
       }
 
-        @x = @coordinate[coordinate].first
-        @y = @coordinate[coordinate].last
+      @x = @coordinate[coordinate].first
+      @y = @coordinate[coordinate].last
       map_move
     end
 
@@ -79,7 +79,7 @@
       if available_spaces.include?(@board.game_board[@x][@y])
         @board.game_board[@x][@y] = "X"
         puts "========"
-         @board.print_board
+        @board.print_board
       else
         puts "This space has already been marked"
       end
@@ -112,8 +112,20 @@
         false
       end
     end
+  end
 
+  class CreatePlayers
+    def initalize(name)
+      human = {
+        "name" => name,
+        "symbol" => ""
+      }
 
+      computer = {
+        "name" => "Computer"
+        "symbol" => ""
+      }
+    end
   end
 # end
 
