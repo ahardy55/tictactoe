@@ -112,10 +112,23 @@
         false
       end
     end
+
+    def welcome_message
+      puts "Welcome to Tic Tac Toe"
+      puts "Please Enter Your Name"
+      @players = CreatePlayer.new(gets.chomp)
+      puts "Welcome #{@players.human["name"]}"
+    end
+
+    def play
+      welcome_message
+
+
+    end
   end
 
   class CreatePlayer
-
+    attr_accessor :human, :computer
     def initialize(name)
       @human = {
         "name" => name, 
@@ -137,8 +150,8 @@
   end
 # end
 
-player = CreatePlayer.new("Adam")
-player.set_symbols
+game = Game.new
+game.play
 
 
 
