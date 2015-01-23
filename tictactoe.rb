@@ -114,27 +114,31 @@
     end
   end
 
-  class CreatePlayers
-    def initalize(name)
-      human = {
-        "name" => name,
-        "symbol" => ""
-      }
+  class CreatePlayer
 
-      computer = {
-        "name" => "Computer"
+    def initialize(name)
+      @human = {
+        "name" => name, 
+        "symbol" => ""
+      } 
+
+      @computer = {
+        "name" => "Computer", 
         "symbol" => ""
       }
     end
+
+    def set_symbols
+      symbols = ["X", "O"].shuffle
+      @human["symbol"] = symbols.pop
+      @computer["symbol"] = symbols.pop
+    end
+    
   end
 # end
 
-board = Game.new
-board.set_coordinates("1")
-board.set_coordinates("2")
-board.set_coordinates("3")
-board.set_coordinates("1")
-
+player = CreatePlayer.new("Adam")
+player.set_symbols
 
 
 
