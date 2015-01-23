@@ -57,6 +57,7 @@
       }
       @x = @coordinate[coordinate].first
       @y = @coordinate[coordinate].last
+      map_move
     end
 
     def map_move
@@ -68,14 +69,25 @@
     def winner?
       puts "------------"
       @board.winning_spaces.each do |winning_rows|
-        if winning_rows == ["X", "X", "X"] || ["O", "O", "O"]
-          true
-          break
-        else 
-          false
+        if winning_rows == ["X", "X", "X"] || winning_rows == ["O", "O", "O"]
+          return true
+        else
+          return false
         end
+        # if winning_rows == ["X", "X", "X"] || ["O", "O", "O"]
+        #   return true
+        # else 
+        #   false
+        # end
       end
     end
+
+    # def draw?
+    #   unless @board.game_board.flatten.any? { |space| space.is_a? Fixnum } || winner?
+    #     true
+    #   end
+
+    # end
 
 
   end
@@ -83,12 +95,10 @@
 
 game = Game.new
 game.set_coordinates("1")
-game.map_move
 game.set_coordinates("2")
-game.map_move
 game.set_coordinates("3")
-game.map_move
-game.winner?
+p game.winner?
+
 
 
 
