@@ -72,18 +72,24 @@
 
       @x = @coordinate[coordinate].first
       @y = @coordinate[coordinate].last
-      map_move
+     
     end
 
-    def map_move
+    def map_move(move)
+      set_coordinates(move)
       if available_spaces.include?(@board.game_board[@x][@y])
-        @board.game_board[@x][@y] = "X"
+        @board.game_board[@x][@y] = @players.human["symbol"]
         puts "========"
         @board.print_board
       else
         puts "This space has already been marked"
       end
-     
+    end
+
+    def computer_move
+      computer_coordinate = available_spaces.sample.to_s
+      set_coordinates(computer_coordinate)
+      @board.game_board[@x][@y] = @players.computer["symbol"]
     end
 
     def winner?
@@ -117,13 +123,14 @@
       puts "Welcome to Tic Tac Toe"
       puts "Please Enter Your Name"
       @players = CreatePlayer.new(gets.chomp)
+      @players.set_symbols
       puts "Welcome #{@players.human["name"]}"
     end
 
     def play
       welcome_message
-
-
+      until game_over?
+      end
     end
   end
 
@@ -151,7 +158,8 @@
 # end
 
 game = Game.new
-game.play
+game.welcome_message
+game.computer_move
 
 
 
