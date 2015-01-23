@@ -82,22 +82,24 @@
       end
     end
 
-    # def draw?
-    #   unless @board.game_board.flatten.any? { |space| space.is_a? Fixnum } || winner?
-    #     true
-    #   end
+    def draw?
+      unless @board.game_board.flatten.any? { |space| space.is_a? Fixnum } || winner?
+        true
+      else
+        false
+      end
 
-    # end
+    end
 
 
   end
 # end
 
 game = Game.new
-game.set_coordinates("1")
-game.set_coordinates("2")
-game.set_coordinates("3")
-p game.winner?
+
+
+p game.draw?
+
 
 
 
