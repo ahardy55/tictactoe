@@ -1,7 +1,7 @@
 # module TicTacToe
 
   class Board
-    attr_accessor :game_board
+    attr_accessor :game_board, :winners
     def initialize
       @game_board = Array.new(3) {Array.new(3)}
     end
@@ -41,6 +41,8 @@
       @board = board
       @board.format_board
       @board.print_board
+      @formatted = @board.format_board
+
     end
 
     def available_spaces
@@ -95,11 +97,11 @@
     end
 
     def winner?
-      @board.winning_spaces.each do |winning_rows|
-        if winning_rows == ["X", "X", "X"] || winning_rows == ["O", "O", "O"]
+      @board.winning_spaces.each do |row|
+        if row == ["X", "X", "X"] || row == ["O", "O", "O"]
           return true
         else
-          return false
+          false
         end
       end
     end
@@ -113,11 +115,9 @@
     end
 
     def game_over?
-      if winner? || draw?
-        true
-      else
-        false
-      end
+      return winner? if winner?
+      return draw if draw?
+      false
     end
 
     def welcome_message
@@ -131,18 +131,18 @@
     def play
       welcome_message
 
-      until game_over?
+      until game_over? == true
         if @players.human["symbol"] == "X"
-          puts "Pick Your Spot!"
+          puts "#{@players.human["name"]}'s Turn"
           map_move(gets.chomp)
-          break if game_over?
-          puts "Computer's Turn"
+          break if game_over? == true
+          puts "#{@players.computer["name"]}'s Turn"
           computer_move
         else
-          puts "Computer's Turn"
+          puts "#{@players.computer["name"]}'s Turn"
           computer_move
-          break if game_over?
-          puts "Pick A Spot!"
+          break if game_over? == true
+          puts "#{@players.human["name"]}'s Turn"
           map_move(gets.chomp)
         end
       end
@@ -174,9 +174,14 @@
 # end
 
 
+game = Game.new
+game.play
 
-board = Game.new
-board.play
+
+
+
+
+
 
 
 
