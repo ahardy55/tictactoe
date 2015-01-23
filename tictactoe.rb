@@ -74,11 +74,6 @@
         else
           return false
         end
-        # if winning_rows == ["X", "X", "X"] || ["O", "O", "O"]
-        #   return true
-        # else 
-        #   false
-        # end
       end
     end
 
@@ -88,19 +83,25 @@
       else
         false
       end
+    end
 
+    def game_over?
+      if winner? || draw?
+        true
+      else
+        false
+      end
     end
 
 
   end
 # end
 
-game = Game.new
-
-
-p game.draw?
-
-
+board = Game.new
+board.set_coordinates("1")
+board.set_coordinates("2")
+board.set_coordinates("3")
+p board.game_over?
 
 
 
