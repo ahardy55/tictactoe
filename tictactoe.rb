@@ -76,10 +76,10 @@
     end
 
     def map_move(move)
+      available_spaces
       set_coordinates(move)
       if available_spaces.include?(@board.game_board[@x][@y])
         @board.game_board[@x][@y] = @players.human["symbol"]
-        puts "========"
         @board.print_board
       else
         puts "This space has already been marked"
@@ -87,13 +87,14 @@
     end
 
     def computer_move
+      available_spaces
       computer_coordinate = available_spaces.sample.to_s
       set_coordinates(computer_coordinate)
       @board.game_board[@x][@y] = @players.computer["symbol"]
+      @board.print_board
     end
 
     def winner?
-      puts "------------"
       @board.winning_spaces.each do |winning_rows|
         if winning_rows == ["X", "X", "X"] || winning_rows == ["O", "O", "O"]
           return true
@@ -129,9 +130,24 @@
 
     def play
       welcome_message
+
       until game_over?
+        if @players.human["symbol"] == "X"
+          puts "Pick Your Spot!"
+          map_move(gets.chomp)
+          break if game_over?
+          puts "Computer's Turn"
+          computer_move
+        else
+          puts "Computer's Turn"
+          computer_move
+          break if game_over?
+          puts "Pick A Spot!"
+          map_move(gets.chomp)
+        end
       end
     end
+
   end
 
   class CreatePlayer
@@ -157,13 +173,10 @@
   end
 # end
 
-game = Game.new
-game.welcome_message
-game.computer_move
 
 
-
-
+board = Game.new
+board.play
 
 
 
