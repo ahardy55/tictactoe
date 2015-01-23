@@ -43,6 +43,20 @@
       @board.print_board
     end
 
+    def available_spaces
+      @available_spaces = []
+      @board.game_board.each do |row|
+        row.each do |space|
+          if (1..9).include?(space)
+            @available_spaces << space
+          end
+        end
+      end
+
+      @available_spaces
+
+    end
+
     def set_coordinates(coordinate)
       @coordinate = {
         "1" => [0, 0], 
@@ -55,15 +69,21 @@
         "8" => [2, 1],
         "9" => [2, 2],
       }
-      @x = @coordinate[coordinate].first
-      @y = @coordinate[coordinate].last
+
+        @x = @coordinate[coordinate].first
+        @y = @coordinate[coordinate].last
       map_move
     end
 
     def map_move
-      @board.game_board[@x][@y] = "X"
-      puts "========"
-      @board.print_board
+      if available_spaces.include?(@board.game_board[@x][@y])
+        @board.game_board[@x][@y] = "X"
+        puts "========"
+         @board.print_board
+      else
+        puts "This space has already been marked"
+      end
+     
     end
 
     def winner?
@@ -101,7 +121,9 @@ board = Game.new
 board.set_coordinates("1")
 board.set_coordinates("2")
 board.set_coordinates("3")
-p board.game_over?
+board.set_coordinates("1")
+
+
 
 
 
