@@ -34,11 +34,6 @@
         [game_board[0][2], game_board[1][1], game_board[2][0]]
       ]
     end
-
-    def available?(coordinate)
-
-    end
-
   end
 
   class Game
@@ -66,19 +61,38 @@
 
     def map_move
       @board.game_board[@x][@y] = "X"
-
-       puts "========"
-
+      puts "========"
       @board.print_board
     end
 
-  
+    def winner?
+      puts "------------"
+      @board.winning_spaces.each do |winning_rows|
+        if winning_rows == ["X", "X", "X"] || ["O", "O", "O"]
+          true
+          break
+        else 
+          false
+        end
+      end
+    end
+
+
   end
 # end
 
 game = Game.new
 game.set_coordinates("1")
 game.map_move
+game.set_coordinates("2")
+game.map_move
+game.set_coordinates("3")
+game.map_move
+game.winner?
+
+
+
+
 
 
 
