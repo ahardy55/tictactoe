@@ -105,7 +105,6 @@
     def winner?
       @board.winning_spaces.each do |row|
         if row == ["X", "X", "X"] || row == ["O", "O", "O"]
-          puts "#{@current_player["name"]} WINS!"
           return true
         end
       end
@@ -114,7 +113,6 @@
 
     def draw?
       unless @board.game_board.flatten.any? { |space| space.is_a? Fixnum } || winner? == true
-        puts "Futility persists.  It's a draw"
         return true
       end
       false
@@ -124,6 +122,11 @@
       return winner? if winner?
       return draw? if draw?
       false
+    end
+
+    def game_over_message
+      return "Futility persists.  It's a draw" if draw?
+      return "#{@current_player["name"]} WINS!" if winner?
     end
 
     def welcome_message
@@ -151,7 +154,8 @@
           map_move(gets.chomp)
         end
       end
-    end
+      puts game_over_message
+    end 
 
   end
 
