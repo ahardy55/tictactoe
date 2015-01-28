@@ -80,7 +80,7 @@
 
 
     def map_move(move)
-      @current_player = players.human
+      @current_player = @players.human
       available_spaces
       set_coordinates(move)
       if available_spaces.include?(@board.game_board[@x][@y])
@@ -94,7 +94,7 @@
     end
 
     def computer_move
-      @current_player = players.computer
+      @current_player = @players.computer
       available_spaces
       computer_coordinate = available_spaces.sample.to_s
       set_coordinates(computer_coordinate)
@@ -105,24 +105,24 @@
     def winner?
       @board.winning_spaces.each do |row|
         if row == ["X", "X", "X"] || row == ["O", "O", "O"]
+          puts "#{@current_player["name"]} WINS!"
           return true
-        else
-          false
         end
       end
+      false
     end
 
     def draw?
-      unless @board.game_board.flatten.any? { |space| space.is_a? Fixnum } || winner?
-        true
-      else
-        false
+      unless @board.game_board.flatten.any? { |space| space.is_a? Fixnum } || winner? == true
+        puts "Futility persists.  It's a draw"
+        return true
       end
+      false
     end
 
     def game_over?
       return winner? if winner?
-      return draw if draw?
+      return draw? if draw?
       false
     end
 
@@ -136,18 +136,17 @@
 
     def play
       welcome_message
-
-      until game_over? == true
+      until game_over?
         if @players.human["symbol"] == "X"
           puts "#{@players.human["name"]}'s Turn"
           map_move(gets.chomp)
-          break if game_over? == true
+          break if game_over?
           puts "#{@players.computer["name"]}'s Turn"
           computer_move
         else
           puts "#{@players.computer["name"]}'s Turn"
           computer_move
-          break if game_over? == true
+          break if game_over?
           puts "#{@players.human["name"]}'s Turn"
           map_move(gets.chomp)
         end
@@ -190,6 +189,14 @@
 
 game = Game.new
 game.play
+
+
+
+
+
+
+
+
 
 
 
