@@ -59,8 +59,8 @@
 
     end
 
-    def set_coordinates(coordinate)
-      @coordinate = {
+    def coordinates
+      @coordinates ||= {
         "1" => [0, 0], 
         "2" => [0, 1],
         "3" => [0, 2],
@@ -71,11 +71,13 @@
         "8" => [2, 1],
         "9" => [2, 2],
       }
-
-      @x = @coordinate[coordinate].first
-      @y = @coordinate[coordinate].last
-     
     end
+
+    def set_coordinates(coordinate)
+      @x = coordinates[coordinate].first
+      @y = coordinates[coordinate].last
+    end
+
 
     def map_move(move)
       available_spaces
@@ -176,10 +178,6 @@
 
 game = Game.new
 game.play
-
-
-
-
 
 
 
