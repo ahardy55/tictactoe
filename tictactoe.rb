@@ -80,6 +80,7 @@
 
 
     def map_move(move)
+      @current_player = players.human
       available_spaces
       set_coordinates(move)
       if available_spaces.include?(@board.game_board[@x][@y])
@@ -93,6 +94,7 @@
     end
 
     def computer_move
+      @current_player = players.computer
       available_spaces
       computer_coordinate = available_spaces.sample.to_s
       set_coordinates(computer_coordinate)
@@ -166,6 +168,14 @@
         "name" => "Computer", 
         "symbol" => ""
       }
+    end
+
+    def switch_player(current_name)
+      if current_name == "Computer"
+        return @human
+      else
+        return @computer
+      end
     end
 
     def set_symbols
