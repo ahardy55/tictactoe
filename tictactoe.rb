@@ -87,6 +87,8 @@
         @board.print_board
       else
         puts "This space has already been marked"
+        puts "Choose a new space"
+        map_move(gets.chomp)
       end
     end
 
