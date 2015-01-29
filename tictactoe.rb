@@ -171,7 +171,7 @@
     end 
 
     #computer algorithm
-    def board_state
+    def current_board_state
       @board.winning_spaces
     end
 
