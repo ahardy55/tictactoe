@@ -103,8 +103,19 @@
     end
 
     def winner?
+      human_player_symbol = @players.human["symbol"]
       @board.winning_spaces.each do |row|
-        if row == ["X", "X", "X"] || row == ["O", "O", "O"]
+        if row == [human_player_symbol, human_player_symbol, human_player_symbol]
+          return true
+        end
+      end
+      false
+    end
+
+    def loser?
+      computer_player_symbol = @players.computer["symbol"]
+      @board.winning_spaces.each do |row|
+        if row == [computer_player_symbol, computer_player_symbol, computer_player_symbol]
           return true
         end
       end
@@ -112,7 +123,7 @@
     end
 
     def draw?
-      unless @board.game_board.flatten.any? { |space| space.is_a? Fixnum } || winner? == true
+      unless @board.game_board.flatten.any? { |space| space.is_a? Fixnum } || winner? || loser? 
         return true
       end
       false
@@ -121,12 +132,14 @@
     def game_over?
       return winner? if winner?
       return draw? if draw?
+      return loser? if loser?
       false
     end
 
     def game_over_message
       return "Futility persists. It's a draw" if draw?
-      return "#{@current_player["name"]} WINS!" if winner?
+      return "YOU ARE A WINNER!" if winner?
+      return "YOU LOSE!" if loser?
     end
 
     def welcome_message
@@ -157,9 +170,11 @@
       puts game_over_message
     end 
 
+    #computer algorithm
     def board_state
       @board.winning_spaces
     end
+
 
   end
 
@@ -195,6 +210,8 @@
   end
 # end
 
+game = Game.new
+game.play
 
 
 
