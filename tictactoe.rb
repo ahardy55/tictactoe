@@ -79,7 +79,7 @@
     end
 
 
-    def map_move(move)
+    def human_move(move)
       @current_player = @players.human
       available_spaces
       set_coordinates(move)
@@ -89,7 +89,7 @@
       else
         puts "This space has already been marked"
         puts "Choose a new space"
-        map_move(gets.chomp)
+        human_move(gets.chomp)
       end
     end
 
@@ -125,7 +125,7 @@
     end
 
     def game_over_message
-      return "Futility persists.  It's a draw" if draw?
+      return "Futility persists. It's a draw" if draw?
       return "#{@current_player["name"]} WINS!" if winner?
     end
 
@@ -141,8 +141,8 @@
       welcome_message
       until game_over?
         if @players.human["symbol"] == "X"
-          puts "#{@players.human["name"]}'s Turn"
-          map_move(gets.chomp)
+          puts "#{@players.human["name"]}, please select a space"
+          human_move(gets.chomp)
           break if game_over?
           puts "#{@players.computer["name"]}'s Turn"
           computer_move
@@ -150,14 +150,19 @@
           puts "#{@players.computer["name"]}'s Turn"
           computer_move
           break if game_over?
-          puts "#{@players.human["name"]}'s Turn"
-          map_move(gets.chomp)
+          puts "#{@players.human["name"]}, please select a space"
+          human_move(gets.chomp)
         end
       end
       puts game_over_message
     end 
 
+    def board_state
+      @board.winning_spaces
+    end
+
   end
+
 
   class CreatePlayer
     attr_accessor :human, :computer
@@ -191,8 +196,7 @@
 # end
 
 
-game = Game.new
-game.play
+
 
 
 
